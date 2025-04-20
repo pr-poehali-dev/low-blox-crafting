@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Game {
   id: number;
@@ -35,7 +36,9 @@ export const GameCard = ({ game }: GameCardProps) => {
       </div>
       <CardContent className="p-3">
         <h3 className="font-medium line-clamp-1 mb-2">{game.title}</h3>
-        <Button size="sm" className="w-full">Играть</Button>
+        <Link to={`/game/${game.id}`}>
+          <Button size="sm" className="w-full">Играть</Button>
+        </Link>
       </CardContent>
     </Card>
   );
