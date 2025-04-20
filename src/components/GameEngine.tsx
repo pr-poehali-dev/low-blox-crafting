@@ -179,7 +179,7 @@ export const GameEngine = () => {
           // Тень
           ctx.fillStyle = 'rgba(0,0,0,0.2)';
           ctx.beginPath();
-          ctx.ellipse(screenX, screenY + height/2, width/2, width/6, 0, 0, Math.PI * 2);
+          ctx.ellipse(screenX, screenY + height/2, Math.max(0.1, width/2), Math.max(0.1, width/6), 0, 0, Math.PI * 2);
           ctx.fill();
           
           // Сам объект
@@ -208,12 +208,12 @@ export const GameEngine = () => {
     const drawCharacter = (ctx: CanvasRenderingContext2D, char: any) => {
       const screenX = canvas.width / 2 + (char.x - characterRef.current.x) * 40;
       const screenY = canvas.height / 2 + (char.z - characterRef.current.z) * 20;
-      const scale = 1 + (characterRef.current.z - char.z) / 10;
+      const scale = Math.max(0.1, 1 + (characterRef.current.z - char.z) / 10);
       
       // Тень
       ctx.fillStyle = 'rgba(0,0,0,0.2)';
       ctx.beginPath();
-      ctx.ellipse(screenX, screenY + 25 * scale, 15 * scale, 5 * scale, 0, 0, Math.PI * 2);
+      ctx.ellipse(screenX, screenY + 25 * scale, Math.max(0.1, 15 * scale), Math.max(0.1, 5 * scale), 0, 0, Math.PI * 2);
       ctx.fill();
       
       // Ноги
@@ -228,7 +228,7 @@ export const GameEngine = () => {
       // Голова
       ctx.fillStyle = lightenColor(char.color, 30);
       ctx.beginPath();
-      ctx.arc(screenX, screenY - 40 * scale, 12 * scale, 0, Math.PI * 2);
+      ctx.arc(screenX, screenY - 40 * scale, Math.max(0.1, 12 * scale), 0, Math.PI * 2);
       ctx.fill();
       
       // Руки
@@ -238,7 +238,7 @@ export const GameEngine = () => {
       
       // Имя персонажа
       ctx.fillStyle = char === characterRef.current ? '#ff9900' : '#ffffff';
-      ctx.font = `${12 * scale}px Arial`;
+      ctx.font = `${Math.max(8, 12 * scale)}px Arial`;
       ctx.textAlign = 'center';
       ctx.fillText(char.name, screenX, screenY - 60 * scale);
     };
